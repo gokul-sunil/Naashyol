@@ -1,0 +1,265 @@
+/* Pulse glow animation for featured badge */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(247, 147, 26, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(247, 147, 26, 0.8);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Flash Deals Carousel Custom Styles */
+.flash-deals-carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+.flash-deals-carousel .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.flash-deals-carousel .slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.flash-deals-carousel .slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex !important;
+  align-items: stretch;
+}
+
+.flash-deals-carousel .slick-slide {
+  display: block;
+  float: left;
+  height: auto;
+  min-height: 1px;
+}
+
+.flash-deals-carousel .slick-slide > div {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Remove default slick arrows */
+.flash-deals-carousel .slick-prev,
+.flash-deals-carousel .slick-next {
+  display: none !important;
+}
+
+/* Ensure consistent slide spacing */
+.flash-deals-carousel .slick-slide {
+  padding: 0;
+}
+
+.flash-deals-carousel .slick-initialized .slick-slide {
+  display: block;
+}
+
+/* Custom dots styling for flash deals carousel */
+.flash-deals-carousel .slick-dots {
+  bottom: -40px;
+  display: flex !important;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.flash-deals-carousel .slick-dots li {
+  margin: 0 4px;
+}
+
+.flash-deals-carousel .slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: #d1d5db;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.flash-deals-carousel .slick-dots li button:hover {
+  background: #9ca3af;
+}
+
+.flash-deals-carousel .slick-dots li.slick-active button {
+  background: var(--primary-color);
+  width: 32px;
+  border-radius: 6px;
+}
+
+/* Dark mode support for dots */
+.dark .flash-deals-carousel .slick-dots li button {
+  background: #4b5563;
+}
+
+.dark .flash-deals-carousel .slick-dots li button:hover {
+  background: #6b7280;
+}
+
+.dark .flash-deals-carousel .slick-dots li.slick-active button {
+  background: var(--primary-color);
+}
+
+/* Mobile responsive carousel adjustments */
+@media (max-width: 640px) {
+  .flash-deals-carousel .slick-dots {
+    bottom: -30px;
+  }
+  
+  .flash-deals-carousel .slick-dots li button {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .flash-deals-carousel .slick-dots li.slick-active button {
+    width: 24px;
+  }
+}
+
+/* Featured products carousel styles */
+.featured-products-carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 16px;
+}
+
+.featured-products-carousel .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.featured-products-carousel .slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.featured-products-carousel .slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex !important;
+  align-items: stretch;
+}
+
+.featured-products-carousel .slick-slide {
+  display: block;
+  float: left;
+  height: auto;
+  min-height: 1px;
+}
+
+.featured-products-carousel .slick-slide > div {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Remove default slick arrows for featured products */
+.featured-products-carousel .slick-prev,
+.featured-products-carousel .slick-next {
+  display: none !important;
+}
+
+/* Custom dots styling for featured products carousel */
+.featured-products-carousel .slick-dots {
+  bottom: -40px;
+  display: flex !important;
+  justify-content: center;
+  padding: 0;
+  margin: 16px 0 0 0;
+  list-style: none;
+}
+
+.featured-products-carousel .slick-dots li {
+  margin: 0 4px;
+}
+
+.featured-products-carousel .slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: #d1d5db;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.featured-products-carousel .slick-dots li button:hover {
+  background: #9ca3af;
+}
+
+.featured-products-carousel .slick-dots li.slick-active button {
+  background: var(--primary-color);
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* Dark mode support for featured products dots */
+.dark .featured-products-carousel .slick-dots li button {
+  background: #4b5563;
+}
+
+.dark .featured-products-carousel .slick-dots li button:hover {
+  background: #6b7280;
+}
+
+.dark .featured-products-carousel .slick-dots li.slick-active button {
+  background: var(--primary-color);
+}
+
+/* Mobile responsive adjustments for featured products carousel */
+@media (max-width: 640px) {
+  .featured-products-carousel {
+    padding: 0 8px;
+  }
+  
+  .featured-products-carousel .slick-dots {
+    bottom: -30px;
+    margin: 12px 0 0 0;
+  }
+  
+  .featured-products-carousel .slick-dots li button {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .featured-products-carousel .slick-dots li.slick-active button {
+    width: 20px;
+  }
+}

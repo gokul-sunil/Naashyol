@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "../styles/fonts.css";
+@import "../styles/theme.css";
+@import "../styles/carousel.css";
+@import "../styles/glassmorphism.css";
+/* @import "../styles/glassmorphism-override.css"; - Removed to restore premium glass effects */
+
+/* No redundant :root or @theme here as they are now in theme.css */
+
+

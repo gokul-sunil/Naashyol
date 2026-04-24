@@ -1,0 +1,119 @@
+/* Override Glassmorphism with Solid Backgrounds for Better Visibility */
+
+/* Remove glassmorphism from all glass classes - use solid backgrounds instead */
+.glass,
+.glass-sm,
+.glass-lg,
+.glass-xl,
+.glass-card,
+.glass-notification,
+.glass-panel,
+.glass-container {
+  background: rgb(255, 255, 255) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgb(229, 231, 235) !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
+}
+
+.dark .glass,
+.dark .glass-sm,
+.dark .glass-lg,
+.dark .glass-xl,
+.dark .glass-card,
+.dark .glass-notification,
+.dark .glass-panel,
+.dark .glass-container {
+  background: rgb(31, 41, 55) !important;
+  border: 1px solid rgb(55, 65, 81) !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3) !important;
+}
+
+/* Navbar - solid background */
+.glass-navbar {
+  background: rgb(255, 255, 255) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid rgb(229, 231, 235) !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1) !important;
+}
+
+.dark .glass-navbar {
+  background: rgb(17, 24, 39) !important;
+  border-bottom: 1px solid rgb(55, 65, 81) !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3) !important;
+}
+
+/* Input fields - solid background */
+.glass-input {
+  background: rgb(255, 255, 255) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1.5px solid rgb(209, 213, 219) !important;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+}
+
+.glass-input:focus {
+  background: rgb(255, 255, 255) !important;
+  border-color: rgb(247, 147, 26) !important;
+  box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.1) !important;
+}
+
+.dark .glass-input {
+  background: rgb(31, 41, 55) !important;
+  border: 1.5px solid rgb(75, 85, 99) !important;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.2) !important;
+}
+
+.dark .glass-input:focus {
+  background: rgb(31, 41, 55) !important;
+  border-color: rgb(247, 147, 26) !important;
+  box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.15) !important;
+}
+
+/* Buttons - solid background */
+.glass-button {
+  background: rgb(247, 147, 26) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1.5px solid rgb(234, 88, 12) !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1) !important;
+}
+
+.glass-button:hover {
+  background: rgb(234, 88, 12) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+}
+
+/* Remove ::before pseudo-elements that create glass effects */
+.glass-card::before,
+.glass-button::before,
+.glass-panel::before,
+.glass-container::before {
+  display: none !important;
+}
+
+/* Ensure text is always readable - remove text shadows */
+.glass *,
+.glass-sm *,
+.glass-lg *,
+.glass-xl *,
+.glass-card *,
+.glass-notification *,
+.glass-panel *,
+.glass-container * {
+  text-shadow: none !important;
+}
+
+/* Keep hover effects but without glass */
+.glass-card:hover {
+  transform: translateY(-2px) scale(1.01) !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+  border-color: rgb(247, 147, 26) !important;
+}
+
+.dark .glass-card:hover {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4) !important;
+}
+
