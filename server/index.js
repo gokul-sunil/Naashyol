@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./mongoDb/connectDb.js";
 import superAdminRouter from "./router/admin/superAdminRouter.js";
+import adminRouter from "./router/admin/adminRouter.js";
+import vendorRouter from "./router/admin/vendorRouter.js";
 
 dotenv.config();
 connectDB();
@@ -13,6 +15,9 @@ app.get("/",(req,res)=>{
     res.send("Api is running...");
 })
 app.use("/api/v1/super-admin",superAdminRouter);
+app.use("/api/v1/admin",adminRouter);
+app.use("/api/v1/vendor",vendorRouter);
+
 const PORT=process.env.PORT || 8000
 app.listen(PORT,()=>{
   console.log(`✅ Server running on port:${PORT}`);
