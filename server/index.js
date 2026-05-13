@@ -5,6 +5,7 @@ import connectDB from "./mongoDb/connectDb.js";
 import superAdminRouter from "./router/admin/superAdminRouter.js";
 import adminRouter from "./router/admin/adminRouter.js";
 import vendorRouter from "./router/admin/vendorRouter.js";
+import categoryRouter from "./router/admin/categoryRouter.js";
 
 dotenv.config();
 connectDB();
@@ -17,6 +18,7 @@ app.get("/",(req,res)=>{
 app.use("/api/v1/super-admin",superAdminRouter);
 app.use("/api/v1/admin",adminRouter);
 app.use("/api/v1/vendor",vendorRouter);
+app.use("/api/v1/category",categoryRouter);
 
 const PORT=process.env.PORT || 8000
 app.listen(PORT,()=>{

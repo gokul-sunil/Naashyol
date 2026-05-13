@@ -1,4 +1,5 @@
 import { Router } from "express";
+import{createCategory,getAllCategories,getSingleCategory,updateCategory,deleteCategory} from "../../controller/admin/categoryController.js";
 const categoryRouter = Router();
 categoryRouter.route("/create").post(createCategory);
 categoryRouter.route("/all-categories").get(getAllCategories);
