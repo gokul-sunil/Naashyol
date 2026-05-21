@@ -13,16 +13,12 @@ import {
   getProductsByDepartment,
   getSingleProduct,
   getSingleVariant,
+  getAllVariants,
 } from "../../controller/admin/productController.js";
 
 import uploadProductImages from "../../middleware/admin/uploadProductImages.js";
 
 const productRouter = Router();
-
-// =====================================================
-// PRODUCT
-// =====================================================
-
 productRouter.post(
   "/create",
   uploadProductImages.array("images", 5),
@@ -39,10 +35,6 @@ productRouter.delete(
   "/delete/:productId",
   deleteProduct
 );
-
-// =====================================================
-// VARIANTS
-// =====================================================
 
 productRouter.post(
   "/variant/add/:productId",
@@ -79,7 +71,10 @@ productRouter.get(
   "/single/:productId",
   getSingleProduct
 );
-
+productRouter.get(
+  "/variants/:productId",
+  getAllVariants
+);
 productRouter.get(
   "/variant/:productId/:variantId",
   getSingleVariant

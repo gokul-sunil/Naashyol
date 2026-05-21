@@ -3,75 +3,38 @@ import mongoose from "mongoose";
 const productVariantSchema =
   new mongoose.Schema(
     {
-      // =====================================================
-      // VARIANT TYPE
-      // Example:
-      // Color / Size / Storage
-      // =====================================================
-
-      name: {
-        type: String,
-        required: true,
-        trim: true,
+    
+      attributes: {
+        type: Map,
+        of: String,
+        default: {},
       },
-
-      // =====================================================
-      // VARIANT VALUE
-      // Example:
-      // Red / XL / 256GB
-      // =====================================================
-
-      value: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-
-      // =====================================================
-      // VARIANT SKU
-      // =====================================================
-
-      sku: {
+   sku: {
         type: String,
         required: true,
         trim: true,
         uppercase: true,
       },
 
-      // =====================================================
-      // VARIANT PRICE
-      // =====================================================
-
-      price: {
+      purchasePrice: {
         type: Number,
         required: true,
         min: 0,
       },
-
-      // =====================================================
-      // VARIANT STOCK
-      // =====================================================
-
-      stockQuantity: {
+      sellingPrice: {
         type: Number,
-        required: true,
         default: 0,
         min: 0,
       },
-
-      // =====================================================
-      // USE VARIANT IMAGES
-      // =====================================================
-
+            stockQuantity: {
+        type: Number,
+        default: 0,
+        min: 0,
+      },
       useVariantImages: {
         type: Boolean,
         default: false,
       },
-
-      // =====================================================
-      // VARIANT IMAGES
-      // ONLY USED IF useVariantImages = true
-      // =====================================================
 
       images: {
         type: [String],
@@ -87,11 +50,6 @@ const productVariantSchema =
 
         default: [],
       },
-
-      // =====================================================
-      // VARIANT STATUS
-      // =====================================================
-
       status: {
         type: String,
 
@@ -112,20 +70,12 @@ const productVariantSchema =
 
 const productSchema = new mongoose.Schema(
   {
-    // =====================================================
-    // PRODUCT NAME
-    // =====================================================
-
     productName: {
       type: String,
       required: true,
       trim: true,
       index: true,
     },
-
-    // =====================================================
-    // PRODUCT SKU
-    // =====================================================
 
     sku: {
       type: String,
@@ -134,64 +84,38 @@ const productSchema = new mongoose.Schema(
       trim: true,
       uppercase: true,
     },
-
-    // =====================================================
-    // CATEGORY
-    // =====================================================
-
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
       required: true,
       index: true,
     },
-
-    // =====================================================
-    // VENDOR
-    // =====================================================
-
     vendor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Vendor",
       required: true,
       index: true,
     },
-
-    // =====================================================
-    // PRODUCT PRICE
-    // =====================================================
-
-    price: {
+    purchasePrice: {
       type: Number,
-      required: true,
-      min: 0,
-    },
-
-    // =====================================================
-    // STOCK QUANTITY
-    // =====================================================
-
-    stockQuantity: {
-      type: Number,
-      required: true,
       default: 0,
       min: 0,
     },
-
-    // =====================================================
-    // PAID AMOUNT
-    // =====================================================
-
+  sellingPrice: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    stockQuantity: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
     paidAmount: {
       type: Number,
       default: 0,
       min: 0,
     },
-
-    // =====================================================
-    // STATUS
-    // =====================================================
-
     status: {
       type: String,
 
@@ -206,19 +130,10 @@ const productSchema = new mongoose.Schema(
       index: true,
     },
 
-    // =====================================================
-    // DESCRIPTION
-    // =====================================================
-
     description: {
       type: String,
       default: "",
     },
-
-    // =====================================================
-    // PRODUCT IMAGES
-    // =====================================================
-
     images: {
       type: [String],
 
@@ -233,35 +148,20 @@ const productSchema = new mongoose.Schema(
 
       default: [],
     },
-
-    // =====================================================
-    // PRODUCT VARIANTS
-    // =====================================================
-
+    specifications: {
+      type: Map,
+      of: String,
+      default: {},
+    },
     variants: [productVariantSchema],
-
-    // =====================================================
-    // HAS VARIANTS
-    // =====================================================
-
     hasVariants: {
       type: Boolean,
       default: false,
     },
-
-    // =====================================================
-    // TOTAL SALES
-    // =====================================================
-
     totalSales: {
       type: Number,
       default: 0,
     },
-
-    // =====================================================
-    // FEATURED
-    // =====================================================
-
     isFeatured: {
       type: Boolean,
       default: false,
@@ -271,11 +171,6 @@ const productSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
-// =====================================================
-// INDEXES
-// =====================================================
-
 productSchema.index({
   productName: "text",
   description: "text",
@@ -291,49 +186,43 @@ productSchema.index({
   status: 1,
 });
 
-// =====================================================
-// AUTO STOCK STATUS
-// =====================================================
-
-productSchema.pre("save", function (next) {
-  if (this.stockQuantity <= 0) {
-    this.status = "out_of_stock";
-  }
-
-  next();
-});
-
-// =====================================================
-// CATEGORY PRODUCT COUNT UPDATE
-// =====================================================
-
-productSchema.post("save", async function (doc) {
-  try {
-    const Category =
-      mongoose.model("Category");
-
-    if (doc.isNew) {
-      await Category.findByIdAndUpdate(
-        doc.category,
-        {
-          $inc: {
-            productCount: 1,
-          },
-        }
-      );
+productSchema.pre(
+  "save",
+  function () {
+    if (!this.hasVariants) {
+      this.status =
+        this.stockQuantity <= 0
+          ? "out_of_stock"
+          : "approved";
     }
-  } catch (error) {
-    console.log(
-      "CATEGORY COUNT UPDATE ERROR:",
-      error
-    );
   }
-});
+);
 
-// =====================================================
-// CATEGORY PRODUCT COUNT DELETE
-// =====================================================
+// productSchema.post(
+//   "save",
+//   async function (doc) {
+//     try {
+//       const Category =
+//         mongoose.model("Category");
 
+//       if (doc.isNew) {
+//         await Category.findByIdAndUpdate(
+//           doc.category,
+//           {
+//             $inc: {
+//               productCount: 1,
+//             },
+//           }
+//         );
+//       }
+//     } catch (error) {
+//       console.log(
+//         "CATEGORY COUNT UPDATE ERROR:",
+//         error
+//       );
+//     }
+//   }
+// );
 productSchema.post(
   "findOneAndDelete",
   async function (doc) {
@@ -353,7 +242,7 @@ productSchema.post(
       }
     } catch (error) {
       console.log(
-        "CATEGORY COUNT DELETE ERROR:",
+        "CATEGORY PRODUCT DELETE ERROR:",
         error
       );
     }

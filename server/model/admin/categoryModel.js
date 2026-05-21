@@ -7,7 +7,6 @@ const categorySchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
     slug: {
       type: String,
       required: true,
@@ -20,7 +19,6 @@ const categorySchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-
     department: {
       type: String,
 
@@ -45,10 +43,32 @@ const categorySchema = new mongoose.Schema(
 
     status: {
       type: String,
+
       enum: ["active", "inactive"],
+
       default: "active",
+
       index: true,
     },
+  suggestedVariantAttributes: [
+      {
+        name: {
+          type: String,
+          trim: true,
+        },
+
+        values: {
+          type: [String],
+          default: [],
+        },
+      },
+    ],
+    suggestedSpecifications: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
   },
   {
     timestamps: true,
@@ -60,4 +80,7 @@ categorySchema.index({
   slug: 1,
 });
 
-export default mongoose.model("Category", categorySchema);
+export default mongoose.model(
+  "Category",
+  categorySchema
+);
